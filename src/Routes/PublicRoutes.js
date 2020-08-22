@@ -1,26 +1,25 @@
 const express = require('express');
-
 const router = express.Router();
+const multer = require('multer');
+const { createPhishingRequest } = require('../Controllers/PhishingRequestController');
+const { checkFileType } = require('../Utils/utils');
+const { imagesStore } = require('../Utils/upload');
 
-const { createPhishingR } = require('../Services/PhishingRequestService');
-
-router.get('/phishing-request',(req, res) => {
-
-    res.send('Hello World desde el get Phishing!');
+const upload = multer({
+    storage: imagesStore,
+    limits:{fileSize: 1000000},
+    fileFilter: function(req, file, cb){
+        checkFileType(file, cb);
+    }
 });
+  
 
-router.post('/phishing-request', (req, res) => {
-    createPhishingR(req.body)
-    .then( pr => res.send(pr))
-    .catch(()=>res.send('Hubo un error'));
-});
+router.get('/phishing-request', createPhishingRequest);
 
-router.patch('/phishing-request',(req, res) => {
-    res.send('Hello World desde el post!');
-});
+router.post('/phishing-request/upload/:id',[upload.single('file')], createPhishingRequest);
 
-router.delete('/phishing-request',(req, res) => {
-    res.send('Hello World desde el post!');
-});
+router.patch('/phishing-request', createPhishingRequest);
+
+router.delete('/phishing-request', createPhishingRequest);
 
 module.exports = router;

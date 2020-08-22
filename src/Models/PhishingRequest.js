@@ -15,7 +15,7 @@ const PhishingRequestSchema = new Schema({
         default: true,
     }
 }, {
- timestamps: true
+ timestamps: true, strict: false
 });
 
 // Exporto en module.exports el modelo de mongo sin nombre
