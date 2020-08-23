@@ -1,4 +1,4 @@
-const { createPhishingR } = require('../Services/PhishingRequestService');
+const { createPhishingR, readAll } = require('../Services/PhishingRequestService');
 const {classify} = require('../Utils/visualRecognition');
 
 module.exports = {
@@ -23,6 +23,14 @@ module.exports = {
                 clasification_type: req.params.id == 1 ? 'G':'P',  
                 ...answer
             })
+            res.send(pr);
+        } catch(err) {
+            res.send(err);
+        };
+    },
+    readAllPR: async (req, res) => {
+        try {
+            const pr = await readAll();
             res.send(pr);
         } catch(err) {
             res.send(err);
