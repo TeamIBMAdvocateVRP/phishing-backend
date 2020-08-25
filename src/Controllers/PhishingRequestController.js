@@ -23,17 +23,17 @@ module.exports = {
                 clasification_type: req.params.id == 1 ? 'G':'P',  
                 ...answer
             })
-            res.send(pr);
+            res.status(200).send(pr);
         } catch(err) {
-            res.send(err);
+            res.status(503).send(err);
         };
     },
     readAllPR: async (req, res) => {
         try {
             const pr = await readAll();
-            res.send(pr);
+            res.status(200).send(pr);
         } catch(err) {
-            res.send(err);
+            res.status(503).send(err);
         };
     },
 }
