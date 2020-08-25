@@ -35,7 +35,7 @@ app.use('/api', require('./src/Routes/index'));
 //Dirección o url a partir del dominio
 // www.mipaginadebackend.com/
 app.get('/',(req, res) => {
-    res.send('Hello World desde el get!');
+    res.send('la api está funcionando');
 });
 
 app.listen(port, () => {
