@@ -7,7 +7,7 @@ module.exports = {
             const params = {};
             if(req.file) {
                 if(req.file == undefined){
-                    res.send({ msg: 'Error: Ningun Archivo Seleccionado!'});
+                    res.status(404).send({ msg: 'Error: Ningun Archivo Seleccionado!'});
                 } else {
                     console.log(req.file.secure_url)
                     const file_c = req.file.secure_url;
